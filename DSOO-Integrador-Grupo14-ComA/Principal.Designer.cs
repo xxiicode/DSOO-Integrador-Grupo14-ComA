@@ -28,78 +28,98 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.btnAgregarCliente = new System.Windows.Forms.Button();
-            this.btnCobrarCliente = new System.Windows.Forms.Button();
-            this.btnMostrarClientes = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lblTitulo = new Label();
+            btnLogout = new Button();
+            btnAgregarCliente = new Button();
+            btnVerClientes = new Button();
+            btnCobrarCliente = new Button();
+            btnMostrarClientes = new Button();
+            SuspendLayout();
             // 
             // lblTitulo
             // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(150, 20);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(174, 24);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Pantalla Principal";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(200, 31);
+            lblTitulo.Margin = new Padding(4, 0, 4, 0);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(217, 29);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "Pantalla Principal";
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(150, 260);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(150, 30);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "LogOut";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            btnLogout.Location = new Point(200, 400);
+            btnLogout.Margin = new Padding(4, 5, 4, 5);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(200, 46);
+            btnLogout.TabIndex = 1;
+            btnLogout.Text = "LogOut";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
             // 
             // btnAgregarCliente
             // 
-            this.btnAgregarCliente.Location = new System.Drawing.Point(150, 70);
-            this.btnAgregarCliente.Name = "btnAgregarCliente";
-            this.btnAgregarCliente.Size = new System.Drawing.Size(150, 30);
-            this.btnAgregarCliente.TabIndex = 2;
-            this.btnAgregarCliente.Text = "Agregar Cliente";
-            this.btnAgregarCliente.UseVisualStyleBackColor = true;
-            this.btnAgregarCliente.Click += new System.EventHandler(this.btnAgregarCliente_Click);
+            btnAgregarCliente.Location = new Point(200, 164);
+            btnAgregarCliente.Margin = new Padding(4, 5, 4, 5);
+            btnAgregarCliente.Name = "btnAgregarCliente";
+            btnAgregarCliente.Size = new Size(200, 46);
+            btnAgregarCliente.TabIndex = 3;
+            btnAgregarCliente.Text = "Registrar Cliente";
+            btnAgregarCliente.UseVisualStyleBackColor = true;
+            btnAgregarCliente.Click += btnAgregarCliente_Click;
+            // 
+            // btnVerClientes
+            // 
+            btnVerClientes.Location = new Point(200, 114);
+            btnVerClientes.Margin = new Padding(4, 5, 4, 5);
+            btnVerClientes.Name = "btnVerClientes";
+            btnVerClientes.Size = new Size(200, 46);
+            btnVerClientes.TabIndex = 2;
+            btnVerClientes.Text = "Ver Clientes";
+            btnVerClientes.UseVisualStyleBackColor = true;
+            btnVerClientes.Click += btnVerClientes_Click;
             // 
             // btnCobrarCliente
             // 
-            this.btnCobrarCliente.Location = new System.Drawing.Point(150, 120);
-            this.btnCobrarCliente.Name = "btnCobrarCliente";
-            this.btnCobrarCliente.Size = new System.Drawing.Size(150, 30);
-            this.btnCobrarCliente.TabIndex = 3;
-            this.btnCobrarCliente.Text = "Cobrar Cliente";
-            this.btnCobrarCliente.UseVisualStyleBackColor = true;
-            this.btnCobrarCliente.Click += new System.EventHandler(this.btnCobrarCliente_Click);
+            btnCobrarCliente.Location = new Point(200, 214);
+            btnCobrarCliente.Margin = new Padding(4, 5, 4, 5);
+            btnCobrarCliente.Name = "btnCobrarCliente";
+            btnCobrarCliente.Size = new Size(200, 46);
+            btnCobrarCliente.TabIndex = 4;
+            btnCobrarCliente.Text = "Cobrar Cliente";
+            btnCobrarCliente.UseVisualStyleBackColor = true;
+            btnCobrarCliente.Click += btnCobrarCliente_Click;
             // 
             // btnMostrarClientes
             // 
-            this.btnMostrarClientes.Location = new System.Drawing.Point(150, 170);
-            this.btnMostrarClientes.Name = "btnMostrarClientes";
-            this.btnMostrarClientes.Size = new System.Drawing.Size(150, 30);
-            this.btnMostrarClientes.TabIndex = 4;
-            this.btnMostrarClientes.Text = "Clientes que vencen hoy";
-            this.btnMostrarClientes.UseVisualStyleBackColor = true;
-            this.btnMostrarClientes.Click += new System.EventHandler(this.btnMostrarClientes_Click);
+            btnMostrarClientes.Location = new Point(200, 264);
+            btnMostrarClientes.Margin = new Padding(4, 5, 4, 5);
+            btnMostrarClientes.Name = "btnMostrarClientes";
+            btnMostrarClientes.Size = new Size(200, 46);
+            btnMostrarClientes.TabIndex = 5;
+            btnMostrarClientes.Text = "Clientes que vencen hoy";
+            btnMostrarClientes.UseVisualStyleBackColor = true;
+            btnMostrarClientes.Click += btnMostrarClientes_Click;
             // 
             // Principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 320);
-            this.Controls.Add(this.btnMostrarClientes);
-            this.Controls.Add(this.btnCobrarCliente);
-            this.Controls.Add(this.btnAgregarCliente);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.lblTitulo);
-            this.Name = "Principal";
-            this.Text = "Pantalla Principal";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(600, 492);
+            Controls.Add(btnMostrarClientes);
+            Controls.Add(btnCobrarCliente);
+            Controls.Add(btnAgregarCliente);
+            Controls.Add(btnVerClientes);
+            Controls.Add(btnLogout);
+            Controls.Add(lblTitulo);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "Principal";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Pantalla Principal";
+            Load += Principal_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -107,6 +127,7 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnAgregarCliente;
+        private System.Windows.Forms.Button btnVerClientes;
         private System.Windows.Forms.Button btnCobrarCliente;
         private System.Windows.Forms.Button btnMostrarClientes;
     }

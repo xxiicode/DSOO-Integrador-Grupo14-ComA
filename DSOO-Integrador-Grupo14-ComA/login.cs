@@ -28,8 +28,9 @@ namespace DSOO_Integrador_Grupo14_ComA
             if (tablaLogin.Rows.Count > 0)
             {
                 // El usuario existe
-                MessageBox.Show("Ingreso exitoso");
-                // Aquí puedes continuar con la lógica para abrir el siguiente formulario
+                Principal frmPrincipal = new Principal();
+                frmPrincipal.Show();
+                this.Hide();
             }
             else
             {
