@@ -28,30 +28,18 @@ namespace DSOO_Integrador_Grupo14_ComA
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             string dni = txtDNI.Text.Trim();
+            Clientes clientes = new Clientes();
 
-            // Obtener la conexión desde la clase Conexion
-            using (MySqlConnection connection = Conexion.GetInstancia().CrearConexion())
+            if (clientes.ExisteDNI(dni))
             {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT * FROM Clientes WHERE DNI = @DNI", connection);
-                command.Parameters.AddWithValue("@DNI", dni);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        // El DNI ya existe, mostrar un mensaje
-                        MessageBox.Show("El DNI ya está registrado en la base de datos.");
-                    }
-                    else
-                    {
-                        // El DNI no existe, abrir el formulario para ingresar otros datos
-                        IngresarClienteForm ingresarClienteForm = new IngresarClienteForm(dni);
-                        ingresarClienteForm.Owner = this.Owner; // Establece el dueño para que aparezca correctamente
-                        ingresarClienteForm.ShowDialog(); // Cambiar a ShowDialog() para que sea modal
-                        this.Close();
-                    }
-                }
+                MessageBox.Show("El DNI ya está registrado en la base de datos.");
+            }
+            else
+            {
+                IngresarClienteForm ingresarClienteForm = new IngresarClienteForm(dni);
+                ingresarClienteForm.Owner = this.Owner;
+                ingresarClienteForm.ShowDialog();
+                this.Close();
             }
         }
     }

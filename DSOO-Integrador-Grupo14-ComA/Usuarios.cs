@@ -31,6 +31,7 @@ namespace DSOO_Integrador_Grupo14_ComA
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 throw;
             }
             finally

@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,52 +20,49 @@ namespace DSOO_Integrador_Grupo14_ComA
         public IngresarClienteForm(string dni)
         {
             InitializeComponent();
-            txtDNI.Text = dni; // Asigna el DNI a la propiedad
-        }
-
-        private void IngresarClienteForm_Load(object sender, EventArgs e)
-        {
-            txtDNI.Text = DniIngresado;
+            txtDNI.Text = dni; // DNI ingresado desde el formulario anterior
         }
 
     private void btnAceptar_Click(object sender, EventArgs e)
         {
-            // Suponiendo que tienes campos de texto para nombre, dirección, etc.
             string nombre = txtNombre.Text.Trim();
+            string apellido = txtApellido.Text.Trim();
+            string dni = txtDNI.Text.Trim();
             string direccion = txtDireccion.Text.Trim();
+            string mail = txtMail.Text.Trim();
             string telefono = txtTelefono.Text.Trim();
-            string dni = DniIngresado; // Obtén el DNI ingresado desde el formulario anterior
+            DateTime fechaNacimiento = dtpFechaNacimiento.Value;
+            string? tipo = cmbTipo.SelectedItem?.ToString();
 
-            using (MySqlConnection connection = Conexion.GetInstancia().CrearConexion())
+            if (tipo == null)
             {
-                connection.Open();
-                string query = "INSERT INTO Clientes (DNI, Nombre, Direccion, Telefono) VALUES (@DNI, @Nombre, @Direccion, @Telefono)";
+                MessageBox.Show("Por favor, selecciona un tipo de Cliente.");
+                return;
+            }
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@DNI", dni);
-                    command.Parameters.AddWithValue("@Nombre", nombre);
-                    command.Parameters.AddWithValue("@Direccion", direccion);
-                    command.Parameters.AddWithValue("@Telefono", telefono);
-
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Cliente registrado exitosamente.");
-                        this.Close(); // Cerrar el formulario después de guardar
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al registrar el cliente: " + ex.Message);
-                    }
-                }
+            Clientes clientes = new Clientes();
+            try
+            {
+                clientes.RegistrarCliente(nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento, tipo);
+                MessageBox.Show("Cliente registrado exitosamente.");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar el cliente: " + ex.Message);
             }
         }
 
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            // Aquí va la lógica para limpiar los campos del formulario
+            txtDNI.Clear();
+            txtNombre.Clear();
+            txtApellido.Clear();
+            txtDireccion.Clear();
+            txtTelefono.Clear();
+            txtMail.Clear();
+            cmbTipo.SelectedIndex = -1;
+            txtNombre.Focus();
         }
     }
 }
