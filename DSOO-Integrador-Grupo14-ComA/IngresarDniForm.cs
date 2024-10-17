@@ -30,7 +30,7 @@ namespace DSOO_Integrador_Grupo14_ComA
             string dni = txtDNI.Text.Trim();
             Clientes clientes = new Clientes();
 
-            if (clientes.ExisteDNI(dni))
+            if (clientes.ExisteDNI(dni)) // si verdadero, el DNI ya existe
             {
                 MessageBox.Show("El DNI ya está registrado en la base de datos.");
             }

@@ -10,10 +10,7 @@ namespace DSOO_Integrador_Grupo14_ComA
             using (MySqlConnection connection = Conexion.GetInstancia().CrearConexion())
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(*) FROM Clientes WHERE DNI = @DNI", connection); //esto se iria si se usa el procedimiento
-                //Para llamar al procedimiento de la BBDD
-                //MySqlCommand command = new MySqlCommand("ExisteDNI", connection);
-                //command.CommandType = CommandType.StoredProcedure;
+                MySqlCommand command = new MySqlCommand("SELECT COUNT(*) FROM Clientes WHERE DNI = @DNI", connection);
                 command.Parameters.AddWithValue("@DNI", dni);
 
                 int count = Convert.ToInt32(command.ExecuteScalar());
@@ -26,12 +23,9 @@ namespace DSOO_Integrador_Grupo14_ComA
             using (MySqlConnection connection = Conexion.GetInstancia().CrearConexion())
             {
                 connection.Open();
-                string query = "INSERT INTO Clientes (Nombre, Apellido, DNI, Direccion, Mail, Telefono, FechaNacimiento, Tipo) VALUES (@Nombre, @Apellido, @DNI, @Direccion, @Mail, @Telefono, @FechaNacimiento, @Tipo)"; //esto se iria si se usa el procedimiento
-                //Para llamar al procedimiento de la BBDD
-                //MySqlCommand command = new MySqlCommand("RegistrarCliente", connection);
-                //command.CommandType = CommandType.StoredProcedure;
-                using (MySqlCommand command = new MySqlCommand(query, connection)) //esto se iria si se usa el procedimiento
-                { //esto se iria si se usa el procedimiento
+                string query = "INSERT INTO Clientes (Nombre, Apellido, DNI, Direccion, Mail, Telefono, FechaNacimiento, Tipo) VALUES (@Nombre, @Apellido, @DNI, @Direccion, @Mail, @Telefono, @FechaNacimiento, @Tipo)";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
                     command.Parameters.AddWithValue("@Nombre", nombre);
                     command.Parameters.AddWithValue("@Apellido", apellido);
                     command.Parameters.AddWithValue("@DNI", dni);
@@ -41,7 +35,7 @@ namespace DSOO_Integrador_Grupo14_ComA
                     command.Parameters.AddWithValue("@FechaNacimiento", fechaNacimiento);
                     command.Parameters.AddWithValue("@Tipo", tipo);
                     command.ExecuteNonQuery();
-                } //esto se iria si se usa el procedimiento
+                }
             }
         }
     }

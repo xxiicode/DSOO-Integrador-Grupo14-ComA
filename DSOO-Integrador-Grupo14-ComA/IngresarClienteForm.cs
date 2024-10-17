@@ -19,6 +19,7 @@ namespace DSOO_Integrador_Grupo14_ComA
         // Constructor que acepta el DNI como argumento
         public IngresarClienteForm(string dni)
         {
+            DniIngresado = dni ?? throw new ArgumentNullException(nameof(dni)); //agregado para no dar un advertencia
             InitializeComponent();
             txtDNI.Text = dni; // DNI ingresado desde el formulario anterior
         }
