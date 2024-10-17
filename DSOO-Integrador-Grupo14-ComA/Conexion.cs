@@ -22,7 +22,7 @@ namespace DSOO_Integrador_Grupo14_ComA
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "";
+            this.clave = "root";
 
         }
 

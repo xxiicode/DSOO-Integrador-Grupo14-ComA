@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DSOO_Integrador_Grupo14_ComA.entidades;
+using DSOO_Integrador_Grupo14_ComA.servicios;
+using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Bcpg.OpenPgp;
 using System;
 using System.Collections.Generic;
@@ -34,16 +36,19 @@ namespace DSOO_Integrador_Grupo14_ComA
             DateTime fechaNacimiento = dtpFechaNacimiento.Value;
             string? tipo = cmbTipo.SelectedItem?.ToString();
 
+
+            Cliente cliente = new Cliente(nombre,apellido,dni,direccion,mail,telefono,fechaNacimiento,tipo);
             if (tipo == null)
             {
                 MessageBox.Show("Por favor, selecciona un tipo de Cliente.");
                 return;
             }
 
-            Clientes clientes = new Clientes();
+            ServicioClientes clientes = new ServicioClientes();
             try
             {
-                clientes.RegistrarCliente(nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento, tipo);
+                
+                clientes.RegistrarCliente(cliente);
                 MessageBox.Show("Cliente registrado exitosamente.");
                 this.Close();
             }

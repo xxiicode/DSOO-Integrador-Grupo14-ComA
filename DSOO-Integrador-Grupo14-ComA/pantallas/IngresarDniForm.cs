@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DSOO_Integrador_Grupo14_ComA.servicios;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace DSOO_Integrador_Grupo14_ComA
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             string dni = txtDNI.Text.Trim();
-            Clientes clientes = new Clientes();
+            ServicioClientes clientes = new ServicioClientes();
 
             if (clientes.ExisteDNI(dni))
             {
