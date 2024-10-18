@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 12:31 PM
+-- Generation Time: Oct 17, 2024 at 02:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -25,20 +25,11 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ExisteDNI` (IN `dni` VARCHAR(20), OUT `existe` INT)   BEGIN
-    SELECT COUNT(*) INTO existe FROM Clientes WHERE DNI = dni;
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresoLogin` (IN `Usuario` VARCHAR(20), IN `Clave` VARCHAR(15))   BEGIN
     SELECT nombre_usuario
     FROM usuarios
     WHERE nombre_usuario = Usuario
     AND clave_usuario = Clave;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarCliente` (IN `nombre` VARCHAR(50), IN `apellido` VARCHAR(50), IN `dni` VARCHAR(20), IN `direccion` VARCHAR(100), IN `mail` VARCHAR(100), IN `telefono` VARCHAR(20), IN `fechaNacimiento` DATE, IN `tipo` VARCHAR(20))   BEGIN
-    INSERT INTO Clientes (Nombre, Apellido, DNI, Direccion, Mail, Telefono, FechaNacimiento, Tipo)
-    VALUES (nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento, tipo);
 END$$
 
 DELIMITER ;
@@ -66,8 +57,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`Id`, `Nombre`, `Apellido`, `DNI`, `Direccion`, `Mail`, `Telefono`, `FechaNacimiento`, `Tipo`) VALUES
-(1, 'Jose', 'Perez', '123456', 'Calle Falsa 123', 'mail@google.com', '44523456', '1994-10-19', 'socio'),
-(2, 'Jose Arcadio', 'Buendia', '31558475', 'Calle otra 222', 'mail2@google.com', '5544485', '2004-09-15', 'no-socio');
+(1, 'Elon', 'Perez', '123456', 'Calle 123', 'mail@mail.com', '123456', '1994-10-19', 'socio');
 
 -- --------------------------------------------------------
 
@@ -116,13 +106,23 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
