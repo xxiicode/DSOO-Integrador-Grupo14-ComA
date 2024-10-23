@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 
 namespace DSOO_Integrador_Grupo14_ComA
@@ -38,5 +39,50 @@ namespace DSOO_Integrador_Grupo14_ComA
                 }
             }
         }
+
+        // Nuevo método para obtener cliente por DNI
+        public Cliente ObtenerClientePorDni(string dni)
+        {
+            Cliente cliente = null!; // Inicializamos el objeto cliente como nulo
+
+            // Conexión a la base de datos
+            using (MySqlConnection connection = Conexion.GetInstancia().CrearConexion())
+            {
+                connection.Open(); // Abrimos la conexión
+                string query = "SELECT Nombre, Apellido, DNI, Tipo FROM Clientes WHERE DNI = @dni"; // Consulta SQL
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@dni", dni); // Usamos un parámetro para evitar inyecciones SQL
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Si se encuentra un registro
+                        if (reader.Read())
+                        {
+                            // Creamos el objeto cliente con los datos obtenidos
+                            cliente = new Cliente
+                            {
+                                Nombre = reader["Nombre"].ToString(),
+                                Apellido = reader["Apellido"].ToString(),
+                                Dni = reader["DNI"].ToString(),
+                                Tipo = reader["Tipo"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+
+            return cliente!; // Devolvemos el cliente encontrado o nulo si no se encontró
+        }
+    }
+
+    // Clase Cliente para almacenar la información del cliente
+    public class Cliente
+    {
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+        public string? Dni { get; set; }
+        public string? Tipo { get; set; }
     }
 }

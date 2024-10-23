@@ -34,12 +34,15 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void btnVerClientes_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Ver Clientes clickeado");
+            VerClientesForm verClientesForm = new VerClientesForm();
+            verClientesForm.ShowDialog();
         }
 
         private void btnCobrarCliente_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cobrar Cliente clickeado");
+            BuscarClientePagarForm formBuscarCliente = new BuscarClientePagarForm();
+            formBuscarCliente.Owner = this;
+            formBuscarCliente.ShowDialog();
         }
 
         private void btnMostrarClientes_Click(object sender, EventArgs e)
