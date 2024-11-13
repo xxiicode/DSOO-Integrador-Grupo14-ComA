@@ -41,7 +41,7 @@ namespace DSOO_Integrador_Grupo14_ComA
                 return;
             }
 
-            Clientes clientes = new Clientes();
+            ClienteComunicacionBBDD clientes = new ClienteComunicacionBBDD();
             try
             {
                 clientes.RegistrarCliente(nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento, tipo);

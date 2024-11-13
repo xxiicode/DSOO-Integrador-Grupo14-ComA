@@ -4,7 +4,7 @@ using System.Data;
 
 namespace DSOO_Integrador_Grupo14_ComA
 {
-    public class Clientes
+    public class ClienteComunicacionBBDD
     {
         public bool ExisteDNI(string dni)
         {
@@ -15,7 +15,7 @@ namespace DSOO_Integrador_Grupo14_ComA
                 command.Parameters.AddWithValue("@DNI", dni);
 
                 int count = Convert.ToInt32(command.ExecuteScalar());
-                return count > 0; // Devuelve verdadero si el DNI existe
+                return count > 0;
             }
         }
 
@@ -40,27 +40,23 @@ namespace DSOO_Integrador_Grupo14_ComA
             }
         }
 
-        // Nuevo método para obtener cliente por DNI
         public Cliente ObtenerClientePorDni(string dni)
         {
-            Cliente cliente = null!; // Inicializamos el objeto cliente como nulo
+            Cliente cliente = null!;
 
-            // Conexión a la base de datos
             using (MySqlConnection connection = Conexion.GetInstancia().CrearConexion())
             {
-                connection.Open(); // Abrimos la conexión
-                string query = "SELECT Nombre, Apellido, DNI, Tipo FROM Clientes WHERE DNI = @dni"; // Consulta SQL
+                connection.Open();
+                string query = "SELECT Nombre, Apellido, DNI, Tipo FROM Clientes WHERE DNI = @dni";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@dni", dni); // Usamos un parámetro para evitar inyecciones SQL
+                    cmd.Parameters.AddWithValue("@dni", dni);
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        // Si se encuentra un registro
                         if (reader.Read())
                         {
-                            // Creamos el objeto cliente con los datos obtenidos
                             cliente = new Cliente
                             {
                                 Nombre = reader["Nombre"].ToString(),
@@ -73,16 +69,7 @@ namespace DSOO_Integrador_Grupo14_ComA
                 }
             }
 
-            return cliente!; // Devolvemos el cliente encontrado o nulo si no se encontró
+            return cliente!;
         }
-    }
-
-    // Clase Cliente para almacenar la información del cliente
-    public class Cliente
-    {
-        public string? Nombre { get; set; }
-        public string? Apellido { get; set; }
-        public string? Dni { get; set; }
-        public string? Tipo { get; set; }
     }
 }

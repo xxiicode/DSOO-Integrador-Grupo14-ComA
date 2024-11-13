@@ -19,7 +19,7 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void CargarDatosCliente()
         {
-            Clientes clientes = new Clientes();
+            ClienteComunicacionBBDD clientes = new ClienteComunicacionBBDD();
             var cliente = clientes.ObtenerClientePorDni(dniCliente);
 
             if (cliente != null)

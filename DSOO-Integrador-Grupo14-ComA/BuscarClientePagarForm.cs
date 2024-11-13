@@ -21,7 +21,7 @@ namespace DSOO_Integrador_Grupo14_ComA
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string dni = txtDNI.Text.Trim();
-            Clientes clientes = new Clientes();
+            ClienteComunicacionBBDD clientes = new ClienteComunicacionBBDD();
 
             if (!clientes.ExisteDNI(dni)) // si falso, el DNI no existe
             {
