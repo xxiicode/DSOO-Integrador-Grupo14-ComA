@@ -19,6 +19,7 @@
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
         private System.Windows.Forms.Label lblTipo;
         private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.CheckBox chkAptoMedicoEntregado;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnLimpiar;
 
@@ -49,6 +50,7 @@
             dtpFechaNacimiento = new DateTimePicker();
             lblTipo = new Label();
             cmbTipo = new ComboBox();
+            chkAptoMedicoEntregado = new CheckBox();
             btnAceptar = new Button();
             btnLimpiar = new Button();
             SuspendLayout();
@@ -173,16 +175,16 @@
             // 
             // dtpFechaNacimiento
             // 
-            dtpFechaNacimiento.Location = new Point(220, 338);
+            dtpFechaNacimiento.Location = new Point(176, 338);
             dtpFechaNacimiento.Margin = new Padding(4, 5, 4, 5);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            dtpFechaNacimiento.Size = new Size(191, 27);
+            dtpFechaNacimiento.Size = new Size(235, 27);
             dtpFechaNacimiento.TabIndex = 13;
             // 
             // lblTipo
             // 
             lblTipo.AutoSize = true;
-            lblTipo.Location = new Point(16, 400);
+            lblTipo.Location = new Point(16, 395);
             lblTipo.Margin = new Padding(4, 0, 4, 0);
             lblTipo.Name = "lblTipo";
             lblTipo.Size = new Size(42, 20);
@@ -192,15 +194,26 @@
             // cmbTipo
             // 
             cmbTipo.Items.AddRange(new object[] { "socio", "no-socio" });
-            cmbTipo.Location = new Point(146, 395);
+            cmbTipo.Location = new Point(146, 390);
             cmbTipo.Margin = new Padding(4, 5, 4, 5);
             cmbTipo.Name = "cmbTipo";
             cmbTipo.Size = new Size(265, 28);
             cmbTipo.TabIndex = 15;
             // 
+            // chkAptoMedicoEntregado
+            // 
+            chkAptoMedicoEntregado.AutoSize = true;
+            chkAptoMedicoEntregado.Location = new Point(146, 433);
+            chkAptoMedicoEntregado.Margin = new Padding(4, 5, 4, 5);
+            chkAptoMedicoEntregado.Name = "chkAptoMedicoEntregado";
+            chkAptoMedicoEntregado.Size = new Size(191, 24);
+            chkAptoMedicoEntregado.TabIndex = 18;
+            chkAptoMedicoEntregado.Text = "Apto Médico Entregado";
+            chkAptoMedicoEntregado.UseVisualStyleBackColor = true;
+            // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(218, 462);
+            btnAceptar.Location = new Point(218, 485);
             btnAceptar.Margin = new Padding(4, 5, 4, 5);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(100, 35);
@@ -211,10 +224,10 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(384, 462);
+            btnLimpiar.Location = new Point(384, 484);
             btnLimpiar.Margin = new Padding(4, 5, 4, 5);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(100, 35);
+            btnLimpiar.Size = new Size(76, 36);
             btnLimpiar.TabIndex = 17;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
@@ -241,6 +254,7 @@
             Controls.Add(dtpFechaNacimiento);
             Controls.Add(lblTipo);
             Controls.Add(cmbTipo);
+            Controls.Add(chkAptoMedicoEntregado);
             Controls.Add(btnAceptar);
             Controls.Add(btnLimpiar);
             Margin = new Padding(4, 5, 4, 5);

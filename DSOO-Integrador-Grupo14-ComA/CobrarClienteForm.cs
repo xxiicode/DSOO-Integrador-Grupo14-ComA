@@ -19,8 +19,7 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void CargarDatosCliente()
         {
-            ClienteComunicacionBBDD clientes = new ClienteComunicacionBBDD();
-            var cliente = clientes.ObtenerClientePorDni(dniCliente);
+            var cliente = Cliente.ObtenerClientePorDni(dniCliente);
 
             if (cliente != null)
             {
@@ -40,51 +39,78 @@ namespace DSOO_Integrador_Grupo14_ComA
                 else
                 {
                     esSocio = false;
-                    txtReferencia.Text = ""; // Para no socios, se puede llenar después
-                    txtMonto.Text = ""; // Para no socios, se puede llenar después
+                    txtReferencia.Text = "";
+                    txtMonto.Text = ""; 
                 }
             }
             else
             {
                 MessageBox.Show("No se encontraron datos del cliente.");
-                this.Close(); // Cerrar el formulario si no hay datos
+                this.Close();
             }
         }
 
         private void btnCobrar_Click(object sender, EventArgs e)
         {
-            // Aquí podrías procesar el pago para no socios
+            // Validar que el monto no esté vacío si el cliente no es socio
+            if (!esSocio && string.IsNullOrWhiteSpace(txtMonto.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un monto válido para el cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtReferencia.Text))
+            {
+                MessageBox.Show("Por favor, ingrese referencia de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar que el monto sea un número válido
+            decimal monto;
+            if (!decimal.TryParse(txtMonto.Text, out monto))
+            {
+                MessageBox.Show("El monto ingresado no es válido. Por favor ingrese un número.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             MessageBox.Show($"Pago procesado para {txtNombre.Text} {txtApellido.Text}.\nMonto: ${txtMonto.Text}");
-            decimal monto = decimal.Parse( txtMonto.Text );
-            // Aquí puedes agregar la lógica para guardar el pago en la base de datos
+
+            // Guardar el pago en la base de datos
             GuardarPagoEnBaseDeDatos(dniCliente, txtReferencia.Text, monto);
 
+            // Mostrar el recibo
             ReciboForm reciboForm = new ReciboForm(txtNombre.Text, txtApellido.Text, dniCliente, esSocio ? "socio" : "no-socio", txtReferencia.Text, monto);
             reciboForm.ShowDialog();
-            this.Close(); // Cierra el formulario después de procesar el pago
+            this.Close(); // Cierra el formulario despues de mostrar el recibo
         }
 
         private void GuardarPagoEnBaseDeDatos(string dni, string referencia, decimal monto)
         {
-            // Obtener la instancia de la clase Conexion
-            Conexion conexion = Conexion.GetInstancia();
-
-            using (var connection = conexion.CrearConexion())
+            try
             {
-                connection.Open(); // Abrir la conexión
+                // Obtener la instancia de la clase Conexion
+                Conexion conexion = Conexion.GetInstancia();
 
-                // Comando SQL para insertar un nuevo pago
-                var command = new MySqlCommand("INSERT INTO Pagos (DNICliente, Referencia, Valor, FechaPago, VencimientoPago) VALUES (@dni, @referencia, @monto, @fechaPago, @vencimientoPago)", connection);
+                using (var connection = conexion.CrearConexion())
+                {
+                    connection.Open();
 
-                // Asignar los parámetros del comando
-                command.Parameters.AddWithValue("@dni", dni);
-                command.Parameters.AddWithValue("@referencia", referencia);
-                command.Parameters.AddWithValue("@monto", monto);
-                command.Parameters.AddWithValue("@fechaPago", DateTime.Now);
-                command.Parameters.AddWithValue("@vencimientoPago", DateTime.Now.AddMonths(1));
+                    // Comando SQL para insertar un nuevo pago
+                    var command = new MySqlCommand("INSERT INTO Pagos (DNICliente, Referencia, Valor, FechaPago, VencimientoPago) VALUES (@dni, @referencia, @monto, @fechaPago, @vencimientoPago)", connection);
 
-                // Ejecutar el comando
-                command.ExecuteNonQuery();
+                    // Asignar los parámetros del comando
+                    command.Parameters.AddWithValue("@dni", dni);
+                    command.Parameters.AddWithValue("@referencia", referencia);
+                    command.Parameters.AddWithValue("@monto", monto);
+                    command.Parameters.AddWithValue("@fechaPago", DateTime.Now);
+                    command.Parameters.AddWithValue("@vencimientoPago", DateTime.Now.AddMonths(1));
+
+                    // Ejecutar el comando
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el pago en la base de datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

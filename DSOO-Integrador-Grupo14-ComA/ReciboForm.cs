@@ -26,13 +26,20 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            btnImprimir.Visible = false;
-            // Asocia el evento PrintPage al método ImprimirRecibo
-            pd.PrintPage += new PrintPageEventHandler(ImprimirRecibo);
-            // Inicia el proceso de impresión
-            pd.Print();
-            MessageBox.Show("Operación exitosa", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close(); // Cierra el formulario después de imprimir
+            try
+            {
+                btnImprimir.Visible = false;
+                // Asocia el PrintPage al método ImprimirRecibo
+                pd.PrintPage += new PrintPageEventHandler(ImprimirRecibo);
+                // Inicia
+                pd.Print();
+                MessageBox.Show("Operación exitosa", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al imprimir el recibo: {ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ImprimirRecibo(object sender, PrintPageEventArgs e)
@@ -43,12 +50,13 @@ namespace DSOO_Integrador_Grupo14_ComA
             int ancho = this.Width;
             int alto = this.Height;
 
-            // Crea un bitmap para dibujar el formulario
-            Bitmap img = new Bitmap(ancho, alto);
-            this.DrawToBitmap(img, new Rectangle(0, 0, ancho, alto));
-
-            // Dibuja la imagen del formulario en el área de impresión
-            e.Graphics!.DrawImage(img, new Point(x, y));
+            // Crea el bitmap para dibujar el formulario
+            using (Bitmap img = new Bitmap(ancho, alto))
+            {
+                this.DrawToBitmap(img, new Rectangle(0, 0, ancho, alto));
+                // Dibuja la imagen del formulario en el área de impresión
+                e.Graphics!.DrawImage(img, new Point(x, y));
+            }
         }
     }
 }

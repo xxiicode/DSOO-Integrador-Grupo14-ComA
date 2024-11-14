@@ -28,9 +28,9 @@ namespace DSOO_Integrador_Grupo14_ComA
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             string dni = txtDNI.Text.Trim();
-            ClienteComunicacionBBDD clientes = new ClienteComunicacionBBDD();
 
-            if (clientes.ExisteDNI(dni)) // si verdadero, el DNI ya existe
+
+            if (Cliente.ExisteDNI(dni)) // si verdadero, el DNI ya existe
             {
                 MessageBox.Show("El DNI ya está registrado en la base de datos.");
             }

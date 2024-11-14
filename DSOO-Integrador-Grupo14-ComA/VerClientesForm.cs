@@ -19,54 +19,47 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         public void CargaGrilla()
         {
-            MySqlConnection sqlCon = null!;
             try
             {
                 string query = "SELECT Nombre, Apellido, DNI, Direccion, Mail, Telefono, FechaNacimiento, Tipo FROM clientes";
-                sqlCon = Conexion.GetInstancia().CrearConexion(); // Tu método de conexión.
-                MySqlCommand comando = new MySqlCommand(query, sqlCon);
-                comando.CommandType = CommandType.Text;
-                sqlCon.Open();
-
-                MySqlDataReader reader = comando.ExecuteReader();
-
-                if (reader.HasRows)
+                using (MySqlConnection sqlCon = Conexion.GetInstancia().CrearConexion())
                 {
-                    while (reader.Read())
+                    MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                    comando.CommandType = CommandType.Text;
+
+                    sqlCon.Open();
+                    MySqlDataReader reader = comando.ExecuteReader();
+
+                    if (reader.HasRows)
                     {
-                        int renglon = dgvClientes.Rows.Add(); // Agrega una fila al DataGridView.
-                        dgvClientes.Rows[renglon].Cells[0].Value = reader.GetString(0); // Nombre
-                        dgvClientes.Rows[renglon].Cells[1].Value = reader.GetString(1); // Apellido
-                        dgvClientes.Rows[renglon].Cells[2].Value = reader.GetString(2); // DNI
-                        dgvClientes.Rows[renglon].Cells[3].Value = reader.GetString(3); // Dirección
-                        dgvClientes.Rows[renglon].Cells[4].Value = reader.GetString(4); // Mail
-                        dgvClientes.Rows[renglon].Cells[5].Value = reader.GetString(5); // Teléfono
-                        dgvClientes.Rows[renglon].Cells[6].Value = reader.GetDateTime(6).ToShortDateString(); // Fecha de Nacimiento
-                        dgvClientes.Rows[renglon].Cells[7].Value = reader.GetString(7); // Tipo
-
+                        while (reader.Read())
+                        {
+                            int renglon = dgvClientes.Rows.Add(); // Agrega la fila al DataGridView.
+                            dgvClientes.Rows[renglon].Cells[0].Value = reader.GetString(0); // Nombre
+                            dgvClientes.Rows[renglon].Cells[1].Value = reader.GetString(1); // Apellido
+                            dgvClientes.Rows[renglon].Cells[2].Value = reader.GetString(2); // DNI
+                            dgvClientes.Rows[renglon].Cells[3].Value = reader.GetString(3); // Dirección
+                            dgvClientes.Rows[renglon].Cells[4].Value = reader.GetString(4); // Mail
+                            dgvClientes.Rows[renglon].Cells[5].Value = reader.GetString(5); // Teléfono
+                            dgvClientes.Rows[renglon].Cells[6].Value = reader.GetDateTime(6).ToShortDateString(); // Fecha de Nacimiento
+                            dgvClientes.Rows[renglon].Cells[7].Value = reader.GetString(7); // Tipo
+                        }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("No hay datos para mostrar.");
+                    else
+                    {
+                         MessageBox.Show("No hay datos para mostrar.");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al cargar los datos: {ex.Message}");
             }
-            finally
-            {
-                if (sqlCon != null && sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
-            }
         }
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // esto se agrego por hacer click donde no debia y si lo borro da error
         }
     }
 }

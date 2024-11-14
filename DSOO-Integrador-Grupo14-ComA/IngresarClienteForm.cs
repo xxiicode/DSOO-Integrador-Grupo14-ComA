@@ -26,6 +26,8 @@ namespace DSOO_Integrador_Grupo14_ComA
 
     private void btnAceptar_Click(object sender, EventArgs e)
         {
+            Cliente nuevoCliente;
+
             string nombre = txtNombre.Text.Trim();
             string apellido = txtApellido.Text.Trim();
             string dni = txtDNI.Text.Trim();
@@ -35,16 +37,34 @@ namespace DSOO_Integrador_Grupo14_ComA
             DateTime fechaNacimiento = dtpFechaNacimiento.Value;
             string? tipo = cmbTipo.SelectedItem?.ToString();
 
-            if (tipo == null)
+            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(apellido) || string.IsNullOrWhiteSpace(dni))
+            {
+                MessageBox.Show("Los campos nombre apellido y DNI deben estar completos.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(tipo))
             {
                 MessageBox.Show("Por favor, selecciona un tipo de Cliente.");
                 return;
             }
+            if (!chkAptoMedicoEntregado.Checked)
+            {
+                MessageBox.Show("El cliente debe entregar el apto médico para ser registrado.");
+                return;
+            }
 
-            ClienteComunicacionBBDD clientes = new ClienteComunicacionBBDD();
+            if (tipo == "socio")
+            {
+                nuevoCliente = new Socio(nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento);
+            } else
+            {
+                nuevoCliente = new NoSocio(nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento);
+            }
+
             try
             {
-                clientes.RegistrarCliente(nombre, apellido, dni, direccion, mail, telefono, fechaNacimiento, tipo);
+                nuevoCliente.AgregarCliente();
                 MessageBox.Show("Cliente registrado exitosamente.");
                 this.Close();
             }
@@ -56,13 +76,13 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtDNI.Clear();
             txtNombre.Clear();
             txtApellido.Clear();
             txtDireccion.Clear();
             txtTelefono.Clear();
             txtMail.Clear();
             cmbTipo.SelectedIndex = -1;
+            chkAptoMedicoEntregado.Checked = false;
             txtNombre.Focus();
         }
     }
