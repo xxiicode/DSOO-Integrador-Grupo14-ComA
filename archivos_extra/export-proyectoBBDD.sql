@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 -- Database: `proyecto`
 --
 
+CREATE DATABASE IF NOT EXISTS proyecto;
+USE proyecto;
+
 DELIMITER $$
 --
 -- Procedures
