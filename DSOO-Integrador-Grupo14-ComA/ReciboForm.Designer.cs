@@ -5,7 +5,7 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        //private System.ComponentModel.IContainer components = null;
 
         private System.Windows.Forms.GroupBox groupBoxRecibo;
         private System.Windows.Forms.Label lblTituloPrincipal;
