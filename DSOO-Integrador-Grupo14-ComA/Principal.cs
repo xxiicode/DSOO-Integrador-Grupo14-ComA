@@ -27,27 +27,28 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void btnAgregarCliente_Click(object sender, EventArgs e)
         {
-                IngresarDniForm formDni = new IngresarDniForm();
+                IngresarDniForm formDni = new IngresarDniForm("agregar");
                 formDni.Owner = this;
                 formDni.ShowDialog();
         }
 
         private void btnVerClientes_Click(object sender, EventArgs e)
         {
-            VerClientesForm verClientesForm = new VerClientesForm();
+            VerClientesForm verClientesForm = new VerClientesForm("todos");
             verClientesForm.ShowDialog();
         }
 
         private void btnCobrarCliente_Click(object sender, EventArgs e)
         {
-            BuscarClientePagarForm formBuscarCliente = new BuscarClientePagarForm();
-            formBuscarCliente.Owner = this;
-            formBuscarCliente.ShowDialog();
+            IngresarDniForm formDni = new IngresarDniForm("cobrar");
+            formDni.Owner = this;
+            formDni.ShowDialog();
         }
 
         private void btnMostrarClientes_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Clientes que vencen hoy clickeado");
+            VerClientesForm verClientesForm = new VerClientesForm("vencidosHoy");
+            verClientesForm.ShowDialog();
         }
 
         private void Principal_Load(object sender, EventArgs e)

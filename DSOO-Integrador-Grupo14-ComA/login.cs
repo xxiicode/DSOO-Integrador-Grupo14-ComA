@@ -20,8 +20,8 @@ namespace DSOO_Integrador_Grupo14_ComA
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             DataTable tablaLogin = new DataTable();
-            Usuarios dato = new Usuarios();
-            tablaLogin = dato.Log_Usu(txtUsuario.Text, txtPass.Text);
+            Usuarios usuario = new Usuarios();
+            tablaLogin = usuario.Log_Usu(txtUsuario.Text, txtPass.Text);
 
             if (tablaLogin.Rows.Count > 0)
             {

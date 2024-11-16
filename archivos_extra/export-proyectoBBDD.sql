@@ -60,8 +60,33 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`Id`, `Nombre`, `Apellido`, `DNI`, `Direccion`, `Mail`, `Telefono`, `FechaNacimiento`, `Tipo`) VALUES
-(1, 'Elon', 'Perez', '123456', 'Calle 123', 'mail@mail.com', '123456', '1994-10-19', 'socio');
+(1, 'Elon', 'Musk', '314856985', 'Calle Tesla 123', 'mail@x.com', '0800-666-123', '1971-10-28', 'socio');
+(2, 'Donald', 'Trump', '123456', 'White House', 'maga@usa.com', '555-842-896', '1946-11-14', 'socio');
+(3, 'Nayib', 'Bukele', '654321', 'Pasaje Salvatrucha 6', 'bitcoin@prision.com', '1239-87555', '1981-12-24', 'no-socio');
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `ID` int(11) NOT NULL,
+  `DNICliente` varchar(20) DEFAULT NULL,
+  `Valor` decimal(10,2) DEFAULT NULL,
+  `Referencia` varchar(20) DEFAULT NULL,
+  `FechaPago` date DEFAULT NULL,
+  `VencimientoPago` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pagos`
+--
+
+INSERT INTO `pagos` (`ID`, `DNICliente`, `Valor`, `Referencia`, `FechaPago`, `VencimientoPago`) VALUES
+(1, '314856985', 1000.00, 'Cuota Socio', '2024-11-13', '2024-12-13'),
+(2, '123456', 1000.00, 'Cuota Socio', '2024-10-18', '2024-11-18'),
+(3, '654321', 400.00, 'Futbol', '2024-11-14', '2024-12-14'),
+(4, '654321', 600.00, 'Natacion', '2024-11-14', '2024-12-14'),
 -- --------------------------------------------------------
 
 --
@@ -80,7 +105,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `clave_usuario`, `activo`) VALUES
-(5, 'Lean', '11', 1),
+(1, 'Admin', 'admin', 1),
+(3, 'Lean', '11', 1),
 (6, 'Martin', 'grupo14', 1),
 (7, 'Silvia', '1234', 1);
 

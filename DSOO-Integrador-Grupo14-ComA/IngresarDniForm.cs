@@ -13,6 +13,8 @@ namespace DSOO_Integrador_Grupo14_ComA
 {
     public partial class IngresarDniForm : Form
     {
+        // variable para saber que vista mostrar
+        private string _tipoVista;
         public string DniIngresado { get; set; } = string.Empty;
 
         public string Dni
@@ -20,8 +22,9 @@ namespace DSOO_Integrador_Grupo14_ComA
             get { return txtDNI.Text; }
         }
 
-        public IngresarDniForm()
+        public IngresarDniForm(string tipoVista)
         {
+            _tipoVista = tipoVista; // Asigna el tipo de vista recibido
             InitializeComponent();
         }
 
@@ -29,17 +32,33 @@ namespace DSOO_Integrador_Grupo14_ComA
         {
             string dni = txtDNI.Text.Trim();
 
-
-            if (Cliente.ExisteDNI(dni)) // si verdadero, el DNI ya existe
-            {
-                MessageBox.Show("El DNI ya está registrado en la base de datos.");
+            if (_tipoVista == "agregar") 
+            { 
+                if (Cliente.ExisteDNI(dni)) // si verdadero, el DNI ya existe
+                {
+                    MessageBox.Show("El DNI ya está registrado en la base de datos.");
+                }
+                else
+                {
+                    IngresarClienteForm ingresarClienteForm = new IngresarClienteForm(dni);
+                    ingresarClienteForm.Owner = this.Owner;
+                    ingresarClienteForm.ShowDialog();
+                    this.Close();
+                }
             }
-            else
+            if (_tipoVista == "cobrar")
             {
-                IngresarClienteForm ingresarClienteForm = new IngresarClienteForm(dni);
-                ingresarClienteForm.Owner = this.Owner;
-                ingresarClienteForm.ShowDialog();
-                this.Close();
+                if (!Cliente.ExisteDNI(dni)) // si falso, el DNI no existe
+                {
+                    MessageBox.Show("El DNI no está registrado en la base de datos.");
+                }
+                else
+                {
+                    CobrarClienteForm cobrarClienteForm = new CobrarClienteForm(dni);
+                    cobrarClienteForm.Owner = this.Owner;
+                    cobrarClienteForm.ShowDialog();
+                    this.Close();
+                }
             }
         }
     }
