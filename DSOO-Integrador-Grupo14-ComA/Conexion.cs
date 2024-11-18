@@ -16,13 +16,7 @@ namespace DSOO_Integrador_Grupo14_ComA
         private string clave;
         private static Conexion? con = null;
 
-        public void SetConexionDatos(string puerto, string usuario, string clave)
-        {
-            this.puerto = puerto;
-            this.usuario = usuario;
-            this.clave = clave;
-        }
-
+        //Constructor
         private Conexion()
         {
             this.baseDatos = "proyecto";
@@ -31,6 +25,13 @@ namespace DSOO_Integrador_Grupo14_ComA
             this.usuario = "";//root
             this.clave = "";//""
 
+        }
+
+        public void SetConexionDatos(string puerto, string usuario, string clave)
+        {
+            this.puerto = puerto;
+            this.usuario = usuario;
+            this.clave = clave;
         }
 
         public MySqlConnection CrearConexion()
