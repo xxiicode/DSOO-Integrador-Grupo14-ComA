@@ -60,8 +60,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`Id`, `Nombre`, `Apellido`, `DNI`, `Direccion`, `Mail`, `Telefono`, `FechaNacimiento`, `Tipo`) VALUES
-(1, 'Elon', 'Musk', '314856985', 'Calle Tesla 123', 'mail@x.com', '0800-666-123', '1971-10-28', 'socio');
-(2, 'Donald', 'Trump', '123456', 'White House', 'maga@usa.com', '555-842-896', '1946-11-14', 'socio');
+(1, 'Elon', 'Musk', '314856985', 'Calle Tesla 123', 'mail@x.com', '0800-666-123', '1971-10-28', 'socio'),
+(2, 'Donald', 'Trump', '123456', 'White House', 'maga@usa.com', '555-842-896', '1946-11-14', 'socio'),
 (3, 'Nayib', 'Bukele', '654321', 'Pasaje Salvatrucha 6', 'bitcoin@prision.com', '1239-87555', '1981-12-24', 'no-socio');
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ INSERT INTO `pagos` (`ID`, `DNICliente`, `Valor`, `Referencia`, `FechaPago`, `Ve
 (1, '314856985', 1000.00, 'Cuota Socio', '2024-11-13', '2024-12-13'),
 (2, '123456', 1000.00, 'Cuota Socio', '2024-10-18', '2024-11-18'),
 (3, '654321', 400.00, 'Futbol', '2024-11-14', '2024-12-14'),
-(4, '654321', 600.00, 'Natacion', '2024-11-14', '2024-12-14'),
+(4, '654321', 600.00, 'Natacion', '2024-11-14', '2024-12-14');
 -- --------------------------------------------------------
 
 --
@@ -150,9 +150,7 @@ ALTER TABLE `usuarios`
 --
 -- Constraints for table `usuarios`
 --
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`);
-COMMIT;
+--COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
