@@ -16,13 +16,20 @@ namespace DSOO_Integrador_Grupo14_ComA
         private string clave;
         private static Conexion? con = null;
 
+        public void SetConexionDatos(string puerto, string usuario, string clave)
+        {
+            this.puerto = puerto;
+            this.usuario = usuario;
+            this.clave = clave;
+        }
+
         private Conexion()
         {
             this.baseDatos = "proyecto";
             this.servidor = "localhost";
-            this.puerto = "3306";
-            this.usuario = "root";
-            this.clave = "";
+            this.puerto = "";//3306
+            this.usuario = "";//root
+            this.clave = "";//""
 
         }
 

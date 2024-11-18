@@ -14,10 +14,9 @@ namespace DSOO_Integrador_Grupo14_ComA
         {
             // Validar que los campos no estén vacíos
             if (string.IsNullOrWhiteSpace(txtPuerto.Text) ||
-                string.IsNullOrWhiteSpace(txtUsuario.Text) ||
-                string.IsNullOrWhiteSpace(txtClave.Text))
+                string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, complete los campos Puerto y Usuario.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -32,7 +31,7 @@ namespace DSOO_Integrador_Grupo14_ComA
 
         private void DatosBD_Load(object sender, EventArgs e)
         {
-            // Configuración inicial si es necesaria
+            //
         }
     }
 }
